@@ -19,6 +19,7 @@ LListInt::LListInt() {
 
 //Copy constructor (deep copy)
 LListInt::LListInt(const LListInt& other) {
+  cout << "calling copy constructor" << endl;
   *this = other;
 }
 
@@ -42,7 +43,6 @@ void LListInt::insert(int loc, const int& val) {
   //cout << "insert called for " << loc << ", " << val << " when size is " << size_ << endl;
   if (size_ == 0 && loc == 0) { // if there is nothing in the array
     head_ = new Item(val, NULL, NULL);
-    cout << "new Item" << endl;
     tail_ = head_;
     size_++;
   }
@@ -51,27 +51,23 @@ void LListInt::insert(int loc, const int& val) {
   }
   else if (size_ == 1 && loc == 1) { // if there is one item in list
     tail_ = new Item(val, head_, NULL);
-    cout << "new Item" << endl;
     head_->next = tail_;
     size_++;
   }
   else if (size_ == 1 && loc == 0) {
     Item *newNode = new Item(val, NULL, tail_);
-    cout << "new Item" << endl;
     tail_->prev = newNode;
     head_ = newNode;
     size_++;
   }
   else if (loc == size_) { // if adding to end of list
     Item *temp = new Item(val, tail_, NULL);
-    cout << "new Item" << endl;
     tail_->next = temp;
     tail_ = temp;
     size_++;
   }
   else if (loc == 0 && size_ > 1) { // if adding to the beginning of list
     Item *newNode = new Item(val, NULL, head_);
-    cout << "new Item" << endl;
     head_->prev = newNode;
     head_ = newNode;
     size_++;
@@ -79,7 +75,6 @@ void LListInt::insert(int loc, const int& val) {
   else { // if adding into middle of the list
     Item *temp = getNodeAt(loc);
     Item *newNode = new Item(val, temp->prev, temp);
-    cout << "new Item" << endl;
     temp->prev->next = newNode;
     temp->prev = newNode;
     size_++;
@@ -153,12 +148,13 @@ int const & LListInt::get(int loc) const {
 
 //Assignment Operator (deep copy)
 LListInt& LListInt::operator=(const LListInt& other) {
-	cout << "calling = operator overload" << endl;
+	cout << "calling = operator overload on lists with sizes " << size_ << " " << other.size_ << endl;
 
   if (head_ == other.head_)
     return *this;
 
-  clear();
+  if (size_ != 0)
+    this->clear();
 
   LListInt *new_list = new LListInt();
   cout << "new LListInt" << endl;
@@ -187,21 +183,50 @@ LListInt& LListInt::operator=(const LListInt& other) {
 
 //Concatenation Operator (other should be appended to the end of this)
 LListInt LListInt::operator+(const LListInt& other) const {
-  cout << "calling + operator overload" << endl;
+  cout << "calling + operator overload on lists with sizes " << size_ << " " << other.size_ << endl;
 
-  Item *other_head = other.head_;
+  for (int i = 0; i < size_; i++) 
+    cout << get(i) << " ";
+  cout << endl;
+
+  for (int i = 0; i < other.size_; i++) 
+    cout << other.get(i) << " ";
+  cout << endl;
+
+  LListInt *new_list = new LListInt();
+  Item *this_item = this->head_;
+  Item *other_item = other.head_;
+
+  while (this_item != NULL) {
+    new_list->insert(new_list->size_, this_item->val);
+    this_item = this_item->next;
+  }
+
+  while (other_item != NULL) {
+    new_list->insert(new_list->size_, other_item->val);
+    other_item = other_item->next;
+  }
+
+  /*Item *other_head = other.head_;
   Item *other_tail = other.tail_;
   Item *this_tail = tail_;
+  cout << "this_tail value " << this_tail->val << endl;
 
   this_tail->next = other_head;
   other_head->prev = this_tail;
 
-  other_head = head_;
   this_tail = other_tail;
+  cout << "this_tail value " << this_tail->val << endl;*/
 
-  cout << "end of '+' function" << endl;
+  for (int i = 0; i < new_list->size_; i++) 
+    cout << new_list->get(i) << " ";
+  cout << endl;
 
-  return *this;
+  cout << "end of '+' function, list is size " << new_list->size_ << endl;
+
+  return *new_list;
+
+  //return *this;
 }
 
 // Access Operator
@@ -212,11 +237,11 @@ int const & LListInt::operator[](int position) const {
 
 // Function to iterate through list and delete each item
 void LListInt::clear() {
-  cout << "calling clear()" << endl;
+  cout << "calling clear() on list with size " << size_ << endl;
   while(head_ != NULL){
     Item *temp = head_->next;
-    delete head_;
     cout << "deleting Item" << endl;
+    delete head_;
     head_ = temp;
   }
   tail_ = NULL;
