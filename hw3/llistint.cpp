@@ -11,16 +11,18 @@ Contains functions for inserting, removing, setting, getting, and clearing.
 using namespace std;
 
 // constructor for the linked list
-LListInt::LListInt() {
-  head_ = NULL;
-  tail_ = NULL;
-  size_ = 0;
-}
+LListInt::LListInt(): head_(NULL), tail_(NULL), size_(0) {};
 
 //Copy constructor (deep copy)
 LListInt::LListInt(const LListInt& other) {
   cout << "calling copy constructor" << endl;
-  *this = other;
+  
+  Item *other_tail = other.tail_;
+
+  while (other_tail != NULL) {
+      insert(0, other_tail->val);
+      other_tail = other_tail->prev;
+  }
 }
 
 // deconstructor
@@ -41,6 +43,7 @@ int LListInt::size() const {
 // Function to place a new element into the list
 void LListInt::insert(int loc, const int& val) {
   //cout << "insert called for " << loc << ", " << val << " when size is " << size_ << endl;
+  
   if (size_ == 0 && loc == 0) { // if there is nothing in the array
     head_ = new Item(val, NULL, NULL);
     tail_ = head_;
@@ -86,6 +89,7 @@ void LListInt::insert(int loc, const int& val) {
 // Function to remove an element from a specified location in the list
 void LListInt::remove(int loc) {
   //cout << "remove called for " << loc << " when size is " << size_ << endl;
+
   if (size_ == 0) { // if there is nothing to remove
     throw std::invalid_argument("no items to remove");
   }
@@ -170,13 +174,13 @@ LListInt& LListInt::operator=(const LListInt& other) {
 LListInt LListInt::operator+(const LListInt& other) const {
   cout << "calling + operator overload on lists with sizes " << size() << " " << other.size() << endl;
 
-  for (int i = 0; i < size_; i++) 
+  /*for (int i = 0; i < size_; i++) 
     cout << get(i) << " ";
   cout << endl;
 
   for (int i = 0; i < other.size_; i++) 
     cout << other.get(i) << " ";
-  cout << endl;
+  cout << endl;*/
 
   LListInt new_list = LListInt();
   Item *this_item = head_;
@@ -191,27 +195,14 @@ LListInt LListInt::operator+(const LListInt& other) const {
     new_list.insert(new_list.size_, other_item->val);
     other_item = other_item->next;
   }
-
-  /*Item *other_head = other.head_;
-  Item *other_tail = other.tail_;
-  Item *this_tail = tail_;
-  cout << "this_tail value " << this_tail->val << endl;
-
-  this_tail->next = other_head;
-  other_head->prev = this_tail;
-
-  this_tail = other_tail;
-  cout << "this_tail value " << this_tail->val << endl;*/
-
-  for (int i = 0; i < new_list.size_; i++) 
+  
+  /*for (int i = 0; i < new_list.size_; i++) 
     cout << new_list.get(i) << " ";
-  cout << endl;
+  cout << endl;*/
 
   cout << "end of '+' function, list is size " << new_list.size_ << endl;
 
   return new_list;
-
-  //return *this;
 }
 
 // Access Operator
@@ -225,7 +216,7 @@ void LListInt::clear() {
   cout << "calling clear() on list with size " << size_ << endl;
   while(head_ != NULL){
     Item *temp = head_->next;
-    cout << "deleting Item" << endl;
+    cout << "deleting Item " << head_->val << endl;
     delete head_;
     head_ = temp;
   }

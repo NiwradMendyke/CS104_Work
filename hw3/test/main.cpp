@@ -27,17 +27,15 @@ int main() {
 
 	LListInt list3 = LListInt();
 	cout << "new LListInt" << endl;
-	list3.insert(0, 3);
-	list3.insert(0, 3);
-	list3.insert(0, 3);
-
-	//output(list2);
+	list3.insert(0, 7);
+	list3.insert(0, 7);
+	list3.insert(0, 7);
 
 	//(list2) = (list1);
 
-	//output(list2);
+	LListInt list1(list2);
 
-	(list2) = ((list2) + (list3));
+	//LListInt list1 = (list2 + list3);
 
 	return 0;
 }
