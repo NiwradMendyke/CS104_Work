@@ -151,31 +151,20 @@ LListInt& LListInt::operator=(const LListInt& other) {
 	cout << "calling = operator overload on lists with sizes " << size() << " " << other.size() << endl;
 
   if (head_ == other.head_)
-    return &this;
+    return *this;
 
-  if (size_ != 0)
-    clear();
+  clear();
 
-  size_ = 0;
   Item *other_tail = other.tail_;
   Item *other_head = other.head_;
 
-  if (other.size_ == 0) {
-    head_ = NULL;
-    tail_ = NULL;
-  }
-  else {
-    while (other_tail != NULL) {
+  while (other_tail != NULL) {
       insert(0, other_tail->val);
-      size_++;
-      //cout << "node value " << other_tail->val << endl;
-
       other_tail = other_tail->prev;
-    }
   }
 
   cout << "end of '=' function" << endl;
-  return &this;
+  return *this;
 }
 
 //Concatenation Operator (other should be appended to the end of this)
