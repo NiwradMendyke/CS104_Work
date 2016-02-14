@@ -156,7 +156,6 @@ LListInt& LListInt::operator=(const LListInt& other) {
   clear();
 
   Item *other_tail = other.tail_;
-  Item *other_head = other.head_;
 
   while (other_tail != NULL) {
       insert(0, other_tail->val);
@@ -179,17 +178,17 @@ LListInt LListInt::operator+(const LListInt& other) const {
     cout << other.get(i) << " ";
   cout << endl;
 
-  LListInt *new_list = new LListInt();
-  Item *this_item = this->head_;
+  LListInt new_list = LListInt();
+  Item *this_item = head_;
   Item *other_item = other.head_;
 
   while (this_item != NULL) {
-    new_list->insert(new_list->size_, this_item->val);
+    new_list.insert(new_list.size_, this_item->val);
     this_item = this_item->next;
   }
 
   while (other_item != NULL) {
-    new_list->insert(new_list->size_, other_item->val);
+    new_list.insert(new_list.size_, other_item->val);
     other_item = other_item->next;
   }
 
@@ -204,13 +203,13 @@ LListInt LListInt::operator+(const LListInt& other) const {
   this_tail = other_tail;
   cout << "this_tail value " << this_tail->val << endl;*/
 
-  for (int i = 0; i < new_list->size_; i++) 
-    cout << new_list->get(i) << " ";
+  for (int i = 0; i < new_list.size_; i++) 
+    cout << new_list.get(i) << " ";
   cout << endl;
 
-  cout << "end of '+' function, list is size " << new_list->size_ << endl;
+  cout << "end of '+' function, list is size " << new_list.size_ << endl;
 
-  return *new_list;
+  return new_list;
 
   //return *this;
 }
