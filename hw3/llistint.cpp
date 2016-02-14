@@ -148,29 +148,26 @@ int const & LListInt::get(int loc) const {
 
 //Assignment Operator (deep copy)
 LListInt& LListInt::operator=(const LListInt& other) {
-	cout << "calling = operator overload on lists with sizes " << size_ << " " << other.size_ << endl;
+	cout << "calling = operator overload on lists with sizes " << size() << " " << other.size() << endl;
 
   if (head_ == other.head_)
-    return *this;
+    return &this;
 
   if (size_ != 0)
-    this->clear();
+    clear();
 
-  LListInt *new_list = new LListInt();
-  cout << "new LListInt" << endl;
-
-  new_list->size_ = 0;
+  size_ = 0;
   Item *other_tail = other.tail_;
   Item *other_head = other.head_;
 
   if (other.size_ == 0) {
-    new_list->head_ = NULL;
-    new_list->tail_ = NULL;
+    head_ = NULL;
+    tail_ = NULL;
   }
   else {
     while (other_tail != NULL) {
       insert(0, other_tail->val);
-      new_list->size_++;
+      size_++;
       //cout << "node value " << other_tail->val << endl;
 
       other_tail = other_tail->prev;
@@ -178,12 +175,12 @@ LListInt& LListInt::operator=(const LListInt& other) {
   }
 
   cout << "end of '=' function" << endl;
-  return *new_list;
+  return &this;
 }
 
 //Concatenation Operator (other should be appended to the end of this)
 LListInt LListInt::operator+(const LListInt& other) const {
-  cout << "calling + operator overload on lists with sizes " << size_ << " " << other.size_ << endl;
+  cout << "calling + operator overload on lists with sizes " << size() << " " << other.size() << endl;
 
   for (int i = 0; i < size_; i++) 
     cout << get(i) << " ";
