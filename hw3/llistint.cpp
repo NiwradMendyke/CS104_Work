@@ -14,16 +14,16 @@ using namespace std;
 LListInt::LListInt(): head_(NULL), tail_(NULL), size_(0) {};
 
 //Copy constructor (deep copy)
-LListInt::LListInt(const LListInt& other) {
-  cout << "calling copy constructor" << endl;
+LListInt::LListInt(const LListInt& other): head_(NULL), tail_(NULL), size_(0) {
+  //cout << "calling copy constructor" << endl;
   
   Item *other_tail = other.tail_;
 
   while (other_tail != NULL) {
-      insert(0, other_tail->val);
-      other_tail = other_tail->prev;
+    insert(0, other_tail->val);
+    other_tail = other_tail->prev;
   }
-}
+};
 
 // deconstructor
 LListInt::~LListInt() {
@@ -152,7 +152,7 @@ int const & LListInt::get(int loc) const {
 
 //Assignment Operator (deep copy)
 LListInt& LListInt::operator=(const LListInt& other) {
-	cout << "calling = operator overload on lists with sizes " << size() << " " << other.size() << endl;
+	//cout << "calling = operator overload on lists with sizes " << size() << " " << other.size() << endl;
 
   if (head_ == other.head_)
     return *this;
@@ -166,13 +166,13 @@ LListInt& LListInt::operator=(const LListInt& other) {
       other_tail = other_tail->prev;
   }
 
-  cout << "end of '=' function" << endl;
+  //cout << "end of '=' function" << endl;
   return *this;
 }
 
 //Concatenation Operator (other should be appended to the end of this)
 LListInt LListInt::operator+(const LListInt& other) const {
-  cout << "calling + operator overload on lists with sizes " << size() << " " << other.size() << endl;
+  //cout << "calling + operator overload on lists with sizes " << size() << " " << other.size() << endl;
 
   /*for (int i = 0; i < size_; i++) 
     cout << get(i) << " ";
@@ -200,7 +200,7 @@ LListInt LListInt::operator+(const LListInt& other) const {
     cout << new_list.get(i) << " ";
   cout << endl;*/
 
-  cout << "end of '+' function, list is size " << new_list.size_ << endl;
+  //cout << "end of '+' function, list is size " << new_list.size_ << endl;
 
   return new_list;
 }
@@ -213,10 +213,10 @@ int const & LListInt::operator[](int position) const {
 
 // Function to iterate through list and delete each item
 void LListInt::clear() {
-  cout << "calling clear() on list with size " << size_ << endl;
+  //cout << "calling clear() on list with size " << size_ << endl;
   while(head_ != NULL){
     Item *temp = head_->next;
-    cout << "deleting Item " << head_->val << endl;
+    //cout << "deleting Item " << head_->val << endl;
     delete head_;
     head_ = temp;
   }
