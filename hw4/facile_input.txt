@@ -1,0 +1,11 @@
+    LET    Z  5
+ GOTO   7
+LET WEDGE   4
+ PRINT WEDGE
+PRINT         Z
+  END
+PRINT WEDGE
+        PRINT  Z
+        DIV Z 2
+    GOTO      -1
+  .
