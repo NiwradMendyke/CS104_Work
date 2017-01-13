@@ -1,0 +1,23 @@
+Q: What large input cases did you use?
+I tested my program with "Pride and Prejudice" and "The Hobbit". Worked for both.
+
+
+Q: Which implementation ran faster? How much faster was it?
+The runtimes for both were very very close although the hashtable tended to be just slightly faster.
+
+
+Q: Why do you think that one was faster? Was it because of the chosen input or is there a guarantee made that affects this?
+The Splaytree works best when there are certain words occuring relatively frequently compared to others. And although in the text files there were common words with multiple occurences, there was still an enormous of other words thus in this case the Hashtable was probably slightly faster. 
+
+
+Q: How do you think the running time would compare to the two if you were to implement your Map in the following fashions? Briefly justify each, although you do not need to quantify how much slower/faster with any specificity.
+Unsorted List
+
+Sorted list:
+Slower than the hashfunction and the splaytree. Finding a word would be fast, but it would take a significant amount of time to determine where exactly in the list the new word would go compared to the constant insert time of hashtables. The splaytree also takes usually O(logn) time at worst to insert, but more frequent words should be closer to the top.
+
+Binary search tree, non-rotating variety:
+Slower than the two structures used, since the tree would not be balanced, thus the time needed to find a node would certainly be between close to linear to O(n)
+
+Binary search tree with AVL balancing:
+About a similar amount of time to both the hashfunction and the splaytree. The AVL tree is balanced, so it would take O(logn) time to insert which is approximately the same as the two used. 

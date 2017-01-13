@@ -16,7 +16,7 @@ class EndStatement: public Statement {
 
 public:
 	EndStatement();
-	virtual void execute(ProgramState * state, std::ostream &outf);
+	virtual void execute(ProgramState * state);
 };
 
 #endif

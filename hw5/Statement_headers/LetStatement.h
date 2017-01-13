@@ -29,7 +29,7 @@ public:
 	LetStatement(std::string variableName, int value);
 	
 	// execute statement
-	void execute(ProgramState * state, std::ostream &outf);
+	void execute(ProgramState * state);
 };
 
 #endif

@@ -9,7 +9,7 @@ LetStatement::LetStatement(std::string variableName, int value)
 
 // set the value of the appropriate variable
 // increment the program counter
-void LetStatement::execute(ProgramState * state, ostream &outf) {
+void LetStatement::execute(ProgramState * state) {
 	state->setVar(m_variableName, m_value);
 	state->setCounter(state->getCounter() + 1);
 }

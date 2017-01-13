@@ -7,6 +7,6 @@ ReturnStatement::ReturnStatement() { }
 
 // set the value of the appropriate variable
 // increment the program counter
-void ReturnStatement::execute(ProgramState * state, ostream &outf) {
+void ReturnStatement::execute(ProgramState * state) {
 	state->return_();
 }

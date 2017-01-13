@@ -27,7 +27,7 @@ public:
 	SubStatement(std::string var1, std::string var2);
 
 	// execute statement
-	virtual void execute(ProgramState * state, std::ostream &outf);
+	virtual void execute(ProgramState * state);
 };
 
 #endif

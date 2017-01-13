@@ -1,0 +1,26 @@
+1.
+
+A)
+Acceptable behavior includes: 1, 4, 5
+
+B)
+Recommended editors: 
+emacs, Eclipse, sublime, Microsoft Visual Studio
+
+C)
+Late submission policy: 2
+
+D)
+submit a late submission request form
+
+2.
+
+A)
+Terminal (mac or linux)
+
+B)
+1 git commit -m "non-optional commit message"
+2 git log -p -3
+
+C)
+Git will prompt you for a message using the git editor

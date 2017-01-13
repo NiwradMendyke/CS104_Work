@@ -10,8 +10,8 @@ PrintStatement::PrintStatement(std::string variableName)
 
 // prints the value of the appropriate variable
 // increment the program counter
-void PrintStatement::execute(ProgramState * state, std::ostream &outf) {
-	outf << state->getVar(m_variableName) << std::endl;
+void PrintStatement::execute(ProgramState * state) {
+	cout << state->getVar(m_variableName) << std::endl;
 	state->setCounter(state->getCounter() + 1);
 }
 

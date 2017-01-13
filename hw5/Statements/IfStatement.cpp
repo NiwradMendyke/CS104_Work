@@ -12,7 +12,7 @@ IfStatement::IfStatement(std::string var1, std::string var2, std::string op, int
 // checks if the new_line value is in range of appropriate line calls
 // then gets the value of both variables from ProgramState
 // and performs the appropriate boolean operand based on the value of operation
-void IfStatement::execute(ProgramState * state, ostream &outf) {
+void IfStatement::execute(ProgramState * state) {
 	if (m_new_line > state->getNum() || m_new_line <= 0)
 		throw out_of_range("illegal jump instruction");
 

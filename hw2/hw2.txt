@@ -1,0 +1,145 @@
+1A)
+README.md is unmodified but tracked
+
+1B)
+README.md is modified but not staged for commit
+
+fun_problem.txt is untracked
+
+1C)
+README.md is staged
+
+fun_problem.txt is staged
+
+1D)
+README.md is modified
+
+fun_problem.txt is modified
+
+1E)
+README.md is staged
+
+fun_problem.txt is untracked
+
+fun_problem.txt is empty because the changes made to it were discarded using the checkout command
+
+1F)
+README.md is staged and unstaged
+the text file was modified with echo command so git has identified that there is an untracked change in the file
+
+
+3A)
+for (int i = 0; i < n; i ++)
+    if (A[i] == 0)
+       for (int j = 1; j < n; j *= 2)
+          { /* do something that takes O(1) time */ }
+
+
+Inner loop has logn runtime. And since we are analyzing worst case, every element in A is 0 thus the inner loop is called n times. Thus the runtime for the entire loop is n*log(n). 
+
+f(n) = n*log(n)
+big O notation: O(n*log(n))
+
+3B)
+for (int i = 1; i < n; i++)
+   for (int j = i; j < n; j++)
+        if (j % i == 0)
+            for (int k = 1; k < n; k *= 2)
+               { /* do something that takes O(1) time */ }
+
+The innermost loop of this function advances it's iterator by doubling every time, thus the loop has a runtime of log(n). This loop is called whenever j is divisible by i, and since j starts from i and increments till n, the number of times this holds true decreases as i iterates. When i=1, j is divisible n times. When i=2, j is only divisible half the time. Thus the inner loop is called n/1 + n/2 + n/3 + ... n/n times. 
+In addition, the if statement is called every time, so it is called n-i times. Putting the summation together gets:
+
+n-1			  n-1
+sum (n - i) + sum n/i * log(n)  ->  n^2 - n^2/2 + n^2*log(n)*log(n)
+i=1 		  i=1
+
+f(n) = n^2(1/2 + (log(n))^2)
+big O notation: O((n*log(n))^2)
+
+3C)
+int *a = new int [10];
+int size = 10;
+for (int i = 0; i < n; i ++) {
+   	if (i == size) {  
+       	int newsize = size+10;
+       	int *b = new int [newsize];
+       	for (int j = 0; j < size; j ++) 
+       		b[j] = a[j];
+       	delete [] a;
+       	a = b;
+       	size = newsize;
+   	}
+   	a[i] = sqrt(i);
+}
+
+Inner loop has a runtime of size. Size increases by 10 everytime the conditional is true. Thus the inner for loop is called n/10. By defining size in terms of i, the inner loop has a runtime of 10*i
+
+So the runtime for the whole function is represented by the following summation
+
+    n/10						  n/10
+n + sum (10*i + 5)  ->  n + n/2 + sum 10*i  ->  n + n/2 + (n/10 * (n/10 + 1)/2) 
+    i=0							  i=0
+
+big O notation: O(n^2)
+
+3D)
+int *a = new int [10];
+int size = 10;
+for (int i = 0; i < n; i ++) {
+   if (i == size) {  
+       int newsize = 2*size;
+       int *b = new int [newsize];
+       for (int j = 0; j < size; j ++) 
+       		b[j] = a[j];
+       delete [] a;
+       a = b;
+       size = newsize;
+   }
+   a[i] = sqrt(i);
+}
+
+Inner loop has a runtime of size. Size starts at 10 and doubles log(n/10) times. Thus size defined in terms of i is (10 * 2^i)
+
+10 20 40 80
+
+log(n/10)					log(n/10)
+sum (10 * 2^i + 5) + n  ->  sum (2^i)*10 + n + 5*log(n/10)  ->  n + n + 5*log(n/10)
+i=0							i=0
+
+f(n) = 2n + 5*log(n/10)
+big O notation: O(n)
+
+
+4.1) List of strings
+The best way to preserve the order of the presidents is to maintain the names of each one in the order which they served. For example, 1."Washington" 2."Adams" 3."Jefferson" etc. 
+
+4.2) A map of structs each containing an int and string value
+A map data structure would have int as the population total and the string as the zip code. Thus by searching the map with a zip code, one can easily access a corresponding population value for that county. 
+
+4.3) Set of structs
+Each struct would represent on of the students in the data structure. Struct would allow the data type to store a name, an id, or anything else. The primary purpose for the set is that there would be no duplicates of students in it. 
+
+4.4) A map of structs each containing three ints
+The three ints represent: student ID, assignment number, and grade. The map data structure would allow each of the three attributes of the structs to be accessed based on a search for one of the other attributes
+
+
+5)
+reverses the list, returns 5 4 3 2 1
+
+First, funcA recursively passes each value in the list. Thus the calls for funcA would be as follows: funcA(1) funcA(2) funcA(3) funcA(4) funcA(5). 
+
+funcA(5) would return 5 since there are no more values in the list. 
+
+The first call for funcB would be funcB(4, 5). Since 5 has no next, the 5 is pointed to the 4. Returning to the funcA, the pointer for 4 is deleted. 
+
+Moving back to funcA(3), funcB(3, 5) is called. Since 5 has a next value now, funcB(3, 4) is called and 4 is pointed to 3, then back in funcA, the pointer for 3 is deleted. 
+
+From these three function calls the pattern indicates that the pupose of these functions is to reverse the order of the list. Thus 1 2 3 4 5 would result in 5 4 3 2 1
+
+
+
+
+
+
+

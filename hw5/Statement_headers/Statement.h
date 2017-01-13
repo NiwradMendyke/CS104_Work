@@ -32,7 +32,7 @@ public:
 	// that should terminate the Facile program, such as division by zero or
 	// a RETURN statement without a corresponding GOSUB, the program may exit
 	// instead of returning from execute().
-	virtual void execute(ProgramState*  state, std::ostream &outf) = 0;
+	virtual void execute(ProgramState*  state) = 0;
 };
 
 // Note that we do not need a Shape.cpp.  

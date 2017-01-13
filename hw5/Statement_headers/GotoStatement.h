@@ -26,7 +26,7 @@ public:
 	GotoStatement(int m_new_line);
 
 	// execute statement
-	virtual void execute(ProgramState * state, std::ostream &outf);
+	virtual void execute(ProgramState * state);
 };
 
 #endif
